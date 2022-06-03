@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<body>
+    <script>
+    let livros = [];
+    function cadastrar(livros) {
+        let nome = prompt('Título do livro');
+        let autor = prompt('Nome do autor');
+        let paginas = parseInt(prompt('Total de páginas:'));
+        let livro = {
+            nome: nome,
+            autor: autor,
+            paginas : paginas,
+        };
+        livros.push(livro);
+    }
+    function listar(livros) {
+        let mensagem = '';
+        let id = 0;
+        for (let livro of livros) {
+            mensagem += 'ID: ' + id + ' - ' + 'Título do livro: ' +  livro.nome + '\n' + 'Autor: ' + livro.autor + ' - ' + 'Páginas: ' + livro.paginas + '\n';
+            id++;
+        }
+        alert(mensagem);
+    }   
+    function editar(livros) {
+        listar(livros)
+        let id = parseInt(prompt('Qual id quer editar?'))
+        let livro = livros[id]
+        let nome = prompt(`Título do livro? [${livro.nome}]`); 
+        if (nome == '') {
+            nome = livro.nome        
+        } 
+        let autor = prompt(`Autor? [${livro.autor}]`);
+        if (autor == '') {
+            autor = livro.autor        
+        } 
+        let paginas = prompt(`Número de páginas? [${livro.paginas}]`);
+        if (autor == '') {
+            paginas = livro.paginas        
+        }
+
+        let livroNovo = {
+            nome: nome,
+            autor: autor,
+            paginas : paginas,
+        };
+        livros[id] = livroNovo
+    }  
+    function apagar(livros) {
+        listar(livros)
+        let id = parseInt(prompt('Qual id quer apagar?')) 
+        livros.splice(id, 1)
+    }
+    loop:
+        while (true) {
+            alert('1: Cadastrar\n2: Listar\n3: Editar\n4: Apagar\n5: Sair');
+            opcao = prompt('Digite um número: ');
+            switch (opcao) {
+                case '1': 
+                    cadastrar(livros)
+                    break
+                case '2': 
+                    listar(livros)
+                    break
+                case '3':
+                    editar(livros)
+                    break
+                case '4':
+                    apagar(livros)
+                    break     
+                case '5': 
+                    break loop;
+           }
+        }
+    </script>
+</body>
+</html>
